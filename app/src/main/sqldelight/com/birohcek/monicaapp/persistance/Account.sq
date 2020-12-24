@@ -1,0 +1,28 @@
+CREATE TABLE account (
+
+id INTEGER PRIMARY KEY,
+endpoint TEXT NOT NULL,
+username TEXT NOT NULL
+
+);
+
+CREATE UNIQUE INDEX id_endpoint_username ON account(endpoint, username);
+
+
+selectAll:
+SELECT *
+FROM account;
+
+insertAccount:
+INSERT INTO account(endpoint, username)
+VALUES (?, ?);
+
+lastInsertRowId:
+SELECT last_insert_rowid()
+;
+
+selectById:
+SELECT *
+FROM account
+WHERE id = ?;
+

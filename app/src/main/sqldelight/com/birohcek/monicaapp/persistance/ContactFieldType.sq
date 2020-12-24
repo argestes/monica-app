@@ -1,0 +1,26 @@
+CREATE TABLE contactFieldTypes (
+    id INTEGER PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    protocol TEXT NOT NULL,
+    type TEXT NOT NULL
+);
+
+insert:
+INSERT
+INTO contactFieldTypes(id, name, protocol, type)
+VALUES (?, ?, ?, ?);
+
+selectAll:
+SELECT *
+FROM contactFieldTypes;
+
+selectForId:
+SELECT *
+FROM contactFieldTypes
+WHERE id = ?;
+
+deleteForId:
+DELETE
+FROM contactFieldTypes
+WHERE id = ?;
+

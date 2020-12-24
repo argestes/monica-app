@@ -1,0 +1,26 @@
+CREATE TABLE avatar (
+
+id INTEGER PRIMARY KEY,
+contactId INTEGER NOT NULL,
+url TEXT NOT NULL,
+source TEXT,
+defaultAvatarColor TEXT,
+
+FOREIGN KEY (contactId) REFERENCES contact(id)
+);
+
+CREATE UNIQUE INDEX idx_contact ON avatar(contactId);
+
+selectWithContactId:
+SELECT *
+FROM avatar
+WHERE contactId = ?;
+
+insert:
+INSERT INTO avatar(contactId, url, source, defaultAvatarColor)
+VALUES(?,?,?,?);
+
+deleteForContactId:
+DELETE
+FROM avatar
+WHERE contactId = ?;

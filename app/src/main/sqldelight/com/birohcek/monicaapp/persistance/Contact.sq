@@ -1,0 +1,123 @@
+import com.birohcek.monicaapp.networking.models.SingleDateDto;
+import java.lang.Boolean;
+
+--
+--
+--     @SerialName("information") val information: ContactInformationDto?,
+--     @SerialName("contactFields") val contactFields: List<ContactField>? = null,
+
+--     @SerialName("addresses") val addresses: List<AddressDto> = listOf(),
+--     @SerialName("hash_id") val hashId: String,
+--     @SerialName("nickname") val nickName: String,
+--     @SerialName("complete_name") val completeName: String,
+--     @SerialName("initials") val initials: String,
+--     @SerialName("description") val description: String?,
+--     @SerialName("is_starred") val isStarred: Boolean,
+--     @SerialName("is_partial") val isPartial: Boolean,
+--     @SerialName("is_active") val isActive: Boolean,
+--     @SerialName("is_dead") val isDead: Boolean,
+--     @SerialName("is_me") val isMe: Boolean,
+--     @SerialName("last_called") val lastCalled: String?,
+--     @SerialName("last_activity_together") val lastActivityTogether: String?,
+--     @SerialName("stay_in_touch_frequency") val stayInTouchFrequency: Int?,
+--     @SerialName("stay_in_touch_trigger_date") val stayInTouchTriggerDate: String?,
+
+CREATE TABLE contact (
+    id INTEGER PRIMARY KEY,
+    firstName TEXT NOT NULL,
+    lastName TEXT,
+    pictureUrl TEXT,
+    birthDate TEXT as SingleDateDto,
+    hashId TEXT NOT NULL,
+    nickname TEXT,
+    completeName TEXT NOT NULL,
+    initials TEXT NOT NULL,
+    description TEXT,
+    isStarred INTEGER as Boolean NOT NULL,
+    isPartial INTEGER as Boolean NOT NULL,
+    isActive INTEGER as Boolean NOT NULL,
+    isDead INTEGER as Boolean NOT NULL,
+    lastCalled TEXT,
+    lastActivityTogether TEXT,
+    stayInTouchFreq INTEGER,
+    stayInTouchTriggerDate TEXT
+
+--     petModels: List<PetModel> = listOf(),
+--     birthDate: DateModel?,
+--     relationshipsContainer: List<RelationshipModel> = listOf(),
+--     contactInfos: List<ContactInfoEntryModel> = listOf(),
+--     howYouMet: HowYouMetModel? = null
+);
+
+CREATE UNIQUE INDEX contact_id ON contact(id);
+
+selectAll:
+SELECT *
+FROM contact;
+
+insert:
+INSERT INTO
+contact(id, firstName, lastName, completeName, pictureUrl, birthDate,
+hashId,
+nickname,
+initials,
+description,
+isStarred,
+isPartial,
+isActive,
+isDead,
+lastCalled,
+lastActivityTogether,
+stayInTouchFreq,
+stayInTouchTriggerDate
+)
+VALUES(?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+
+update:
+UPDATE contact
+SET firstName = ?,
+lastName = ?,
+completeName = ?,
+pictureUrl = ?,
+birthDate = ?,
+hashId = ?,
+nickname = ?,
+initials = ?,
+description = ?,
+isStarred = ?,
+isPartial = ?,
+isActive = ?,
+isDead = ?,
+lastCalled = ?,
+lastActivityTogether = ?,
+stayInTouchFreq = ?,
+stayInTouchTriggerDate = ?
+WHERE id = ?;
+
+withId:
+SELECT *
+FROM contact
+WHERE id = ?;
+
+performUpsert:
+INSERT OR REPLACE INTO contact (id,
+firstName,
+lastName,
+completeName,
+pictureUrl,
+birthDate,
+hashId,
+nickname,
+initials,
+description,
+isStarred,
+isPartial,
+isActive,
+isDead,
+lastCalled,
+lastActivityTogether,
+stayInTouchFreq,
+stayInTouchTriggerDate
+
+) VALUES (?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);

@@ -1,0 +1,17 @@
+CREATE TABLE accountToken (
+
+   id INTEGER PRIMARY KEY,
+   token TEXT NOT NULL,
+   account_id INTEGER NOT NULL,
+
+   FOREIGN KEY (account_id) REFERENCES account(id)
+);
+
+selectForAccount:
+SELECT *
+FROM accountToken
+WHERE account_id = ?;
+
+insert:
+INSERT INTO accountToken(token, account_id)
+VALUES (?, ?);

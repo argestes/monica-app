@@ -1,0 +1,23 @@
+import java.lang.Boolean;
+
+CREATE TABLE relationshipType (
+    id INTEGER PRIMARY KEY,
+    name TEXT,
+    name_reverse_relationship TEXT,
+    relationship_type_group_id INTEGER NOT NULL,
+    delible INTEGER AS Boolean DEFAULT 0
+);
+
+insert:
+INSERT
+INTO relationshipType(id, name, name_reverse_relationship, relationship_type_group_id, delible)
+VALUES (?, ?, ?, ?, ?);
+
+withId:
+SELECT *
+FROM relationshipType
+WHERE id = ?;
+
+selectAll:
+SELECT *
+FROM relationshipType;

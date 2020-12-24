@@ -1,0 +1,37 @@
+CREATE TABLE relationship (
+    id INTEGER PRIMARY KEY,
+    contact_is INTEGER NOT NULL,
+    relationship_type INTEGER NOT NULL,
+    of_contact INTEGER NOT NULL,
+
+    FOREIGN KEY (contact_is) REFERENCES contact(id),
+    FOREIGN KEY (of_contact) REFERENCES contact(id),
+    FOREIGN KEY (relationship_type) REFERENCES relationshipType(id)
+);
+
+CREATE UNIQUE INDEX idx_contact_rel_ofcontact
+ON relationship(contact_is, relationship_type, of_contact);
+
+insert:
+INSERT
+INTO relationship(id, contact_is, relationship_type, of_contact)
+VALUES (?, ?, ?, ?);
+
+withId:
+SELECT *
+FROM relationship
+WHERE id = ?;
+
+withContactIs:
+SELECT *
+FROM relationship
+WHERE contact_is = ?;
+
+withOfContact:
+SELECT *
+FROM relationship
+WHERE of_contact = ?;
+
+selectAll:
+SELECT *
+FROM relationship;

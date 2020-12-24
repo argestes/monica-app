@@ -1,0 +1,28 @@
+CREATE TABLE contactFields (
+    id INTEGER PRIMARY KEY,
+    remoteId INTEGER NOT NULL,
+    contactId INTEGER NOT NULL,
+    data TEXT,
+    contactFieldType INTEGER NOT NULL
+);
+
+
+insert:
+INSERT
+INTO contactFields(remoteId, contactId, data, contactFieldType)
+VALUES (?, ?, ?,? );
+
+withRemoteId:
+SELECT *
+FROM contactFields
+WHERE remoteId = ?;
+
+forContactId:
+SELECT *
+FROM contactFields
+WHERE contactId = ?;
+
+deleteForContact:
+DELETE
+FROM contactFields
+WHERE contactId = ?;

@@ -1,0 +1,21 @@
+CREATE TABLE pet (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    type TEXT NOT NULL,
+    owner_id INTEGER NOT NULL,
+    FOREIGN KEY (owner_id) REFERENCES contact(id)
+);
+
+
+byOwnerId:
+SELECT *
+FROM pet
+WHERE owner_id = ?;
+
+removeOwnersPets:
+DELETE FROM pet
+WHERE owner_id = ?;
+
+insert:
+INSERT INTO pet(id, name, type, owner_id)
+VALUES(?,?,?,?);
